@@ -31,7 +31,6 @@ public class Application {
             String debug = String.format("##### CommandLineRunner thread: name='%s' threadId=%d equalToMainThread=%b #####",
                     currentThread.getName(), currentThread.getId(), currentThread.equals(mainThread));
             System.out.println(debug);
-            new ArpScanProcess().execute();
         };
     }
 

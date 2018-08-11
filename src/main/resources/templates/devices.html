@@ -1,10 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Devices on the LAN</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'value of someParam=' + ${someParam}" />
+
+<h1>Devices Detected on the Local Area Network</h1>
+<table>
+    <tr>
+        <th>MAC</th>
+        <th>IP</th>
+        <th>Manufacturer</th>
+    </tr>
+    <tr th:each="lanDevice : ${lanDevices}">
+        <td th:text="${lanDevice.macAddress}" />
+        <td th:text="${lanDevice.ipAddress}" />
+        <td th:text="${lanDevice.nicManufacturer}" />
+    </tr>
+</table>
+
 </body>
 </html>

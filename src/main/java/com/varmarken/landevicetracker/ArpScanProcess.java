@@ -26,7 +26,7 @@ public class ArpScanProcess {
         List<LanDevice> devicesFound = new ArrayList<>();
         ProcessBuilder processBuilder = new ProcessBuilder();
         // TODO play around with retry count; there's a tradeoff between devices found and execution time.
-        processBuilder.command("arp-scan", "--localnet", "--retry=10");
+        processBuilder.command("arp-scan", "--localnet", "--retry=5");
         Process arpscanProcess = processBuilder.start();
         // Read output of arp-scan...
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(arpscanProcess.getInputStream()))) {
