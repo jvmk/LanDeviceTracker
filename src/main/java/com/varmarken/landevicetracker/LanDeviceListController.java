@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TODO add class documentation.
@@ -18,8 +20,8 @@ import java.util.List;
 @Controller
 public class LanDeviceListController {
 
-    @GetMapping("/devices")
-    public String getDevices(@RequestParam(name="someParam", required = true) String someParam, Model model) {
+    @GetMapping("/landevices")
+    public String getDevices(Model model) {
         List<LanDevice> lanDevices = null;
         try {
             lanDevices = new ArpScanProcess().execute();
@@ -31,8 +33,12 @@ public class LanDeviceListController {
             // For now, just return empty list in case of error.
             lanDevices = new ArrayList<>();
         }
-        model.addAttribute("lanDevices", lanDevices);
-        return "devices";
+        // arp-scan can detect same device twice, so remove duplicates before presenting results to the user
+        Set<LanDevice> lanDevicesSet = new HashSet<>();
+        lanDevicesSet.addAll(lanDevices);
+
+        model.addAttribute("lanDevices", lanDevicesSet);
+        return "landevices";
     }
 
 }
